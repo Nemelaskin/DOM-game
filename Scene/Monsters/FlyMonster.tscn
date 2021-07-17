@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Texture/npc/FlyMonster/DangerMonster1.png" type="Texture" id=1]
+[ext_resource path="res://Scene/Monsters/FlyMonster.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 7.20903
+
+[sub_resource type="Animation" id=2]
+resource_name = "New Anim"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0 ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 7.64395
+
+[node name="FlyMonster" type="KinematicBody2D"]
+collision_layer = 4
+script = ExtResource( 2 )
+debugDraw = true
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( -2.00277, 1.25173 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+"anims/New Anim" = SubResource( 2 )
+
+[node name="AreaFlyMonster" type="Area2D" parent="."]
+
+[node name="CollisionFlyMonster" type="CollisionShape2D" parent="AreaFlyMonster"]
+position = Vector2( -1.84846, 1.06705 )
+shape = SubResource( 3 )
+
+[node name="HitPoint" type="Label" parent="."]
+margin_left = -11.3042
+margin_top = -20.6163
+margin_right = 28.6958
+margin_bottom = -6.61633
+text = "10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="AreaFlyMonster" to="." method="_on_AreaFlyMonster_body_entered"]

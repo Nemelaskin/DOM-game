@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Texture/Player/Varis/GG.png" type="Texture" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://Scene/Spells/Spell_FireBoll.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Texture/Player/Varis/GG_3 ходьба.png" type="Texture" id=4]
+[ext_resource path="res://Texture/Player/Varis/GG_2 ходьба.png" type="Texture" id=5]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.75926
+height = 22.9216
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 3.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "die",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
+} ]
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 2 )
+Spell_FireBoll = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.3, 0.3 )
+smoothing_enabled = true
+smoothing_speed = 9.0
+
+[node name="HitPoint" type="Label" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = -16.0
+margin_top = -74.0
+margin_right = 1.0
+margin_bottom = -57.0
+rect_scale = Vector2( 1.0892, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( -3.17295, -1.55004 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.678009, -0.240953 )
+scale = Vector2( 0.2, 0.2 )
+frames = SubResource( 2 )
+animation = "idle"
+playing = true

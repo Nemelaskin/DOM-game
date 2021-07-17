@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Texture/npc/Vampire_exgibition/4112.png" type="Texture" id=1]
+[ext_resource path="res://Texture/npc/Vampire_exgibition/6554.png" type="Texture" id=2]
+[ext_resource path="res://Texture/npc/Vampire_exgibition/41241.png" type="Texture" id=3]
+[ext_resource path="res://Texture/npc/Vampire_exgibition/41212.png" type="Texture" id=4]
+[ext_resource path="res://Texture/npc/Vampire_exgibition/4125.png" type="Texture" id=5]
+[ext_resource path="res://Texture/npc/Vampire_exgibition/4121241.png" type="Texture" id=6]
+[ext_resource path="res://Scene/Monsters/Vampire.gd" type="Script" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Attack",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 14.8833
+height = 37.4811
+
+[node name="Vampire" type="KinematicBody2D"]
+script = ExtResource( 7 )
+
+[node name="AnimatedVampire" type="AnimatedSprite" parent="."]
+position = Vector2( 8.27479, 7.86813 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="CollisionVampire" type="CollisionShape2D" parent="."]
+position = Vector2( 4.73336, 4.13644 )
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 2 )
+
+[node name="HitPoint" type="Label" parent="."]
+margin_left = -7.41261
+margin_top = -59.3009
+margin_right = 32.5874
+margin_bottom = -45.3009
+text = "10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="animation_finished" from="AnimatedVampire" to="." method="_on_AnimatedVampire_animation_finished"]
